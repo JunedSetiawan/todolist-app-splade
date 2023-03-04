@@ -1,28 +1,43 @@
 <x-layout>
   <x-slot name="header">
-      {{ __('TODO LIST APP') }}
+    {{ __('TODO LIST APP') }}
   </x-slot>
 
   <x-panel class="flex flex-col pt-10 pb-16">
-    <h1 class="text-2xl font-bold m-2">Daftar List</h1>
-    <Link href="/users" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 w-max">Tambah List</Link>
-      <div class="text-lg">
-        <table class="table-auto border-collapse border border-slate-400 w-1/2">
-          <thead>
-            <tr>
-              <th class="border">Nomor</th>
-              <th class="border">List</th>
-              <th class="border">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <td class="border">1</td>
-              <td class="border">Shining Star</td>
-              <td class="border">link</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="flex flex-row">
+      <h1 class="text-2xl font-bold m-2">Daftar List</h1>
+      <x-splade-form action="{{ route('list.search') }}" class="flex flex-row ml-2">
+        <x-splade-input name="cari" placeholder="Pencarian..." autofocus="true" />
+        <x-splade-submit label="Cari" class="ml-2" />
+      </x-splade-form>
+      @unless(request()->routeIs('home'))
+      <Link href="{{ route('home') }}"
+        class="mt-3 text-green-800 font-semibold text-center flex items-center mb-6 ml-3">
+      Kembali
+      </Link>
+      @endunless
+    </div>
+    <div class="w-70 flex my-4">
+      <x-splade-form action="{{ route('list.store') }}" class="flex flex-row">
+        <x-splade-input name="list" placeholder="Masukkan Nama List..." autofocus="true" />
+        <x-splade-submit label="Kirim" class="ml-2" />
+      </x-splade-form>
+    </div>
+    <div class="text-lg">
+      <ul class="list-disc">
+        @forelse($lists as $key => $list)
+        <li>{{$list->name }}</li>
+        <div>
+          <x-splade-link href="{{ route('list.edit',$list->id) }}" class="text-blue-800 font-semibold">Edit
+          </x-splade-link>
+          <x-splade-link confirm href="{{ route('list.delete') }}" method="delete" class="text-red-800 font-semibold"
+            :data="['id' => $list->id]">Delete</x-splade-link>
+        </div>
+        @empty
+        <li class="text-3xl font-bold">Tidak Ada List</li>
+        @endforelse
+      </ul>
+      {!! $lists->links() !!}
+    </div>
   </x-panel>
 </x-layout>
