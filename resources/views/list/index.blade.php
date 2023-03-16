@@ -10,7 +10,7 @@
         <x-splade-input name="cari" placeholder="Pencarian..." autofocus="true" />
         <x-splade-submit label="Cari" class="ml-2" />
       </x-splade-form>
-      @unless(request()->routeIs('home'))
+      @unless (request()->routeIs('home'))
       <Link href="{{ route('home') }}"
         class="mt-3 text-green-800 font-semibold text-center flex items-center mb-6 ml-3">
       Kembali
@@ -19,14 +19,14 @@
     </div>
     <div class="w-70 flex my-4">
       <x-splade-form action="{{ route('list.store') }}" class="flex flex-row">
-        <x-splade-input name="list" placeholder="Masukkan Nama List..." autofocus="true" />
+        <x-splade-input name="name" placeholder="Masukkan Nama List..." autofocus="true" />
         <x-splade-submit label="Kirim" class="ml-2" />
       </x-splade-form>
     </div>
     <div class="text-lg">
       <ul class="list-disc">
-        @forelse($lists as $key => $list)
-        <li>{{$list->name }}</li>
+        @forelse ($lists as $key => $list)
+        <li>{{ $list->name }}</li>
         <div>
           <x-splade-link href="{{ route('list.edit',$list->id) }}" class="text-blue-800 font-semibold">Edit
           </x-splade-link>

@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['splade'])->group(function () {
     Route::get('/', [TodoController::class, 'index'])->name('home');
-    Route::get('/create', [TodoController::class, 'create'])->name('list.create');
-    Route::post('/store', [TodoController::class, 'store'])->name('list.store');
-    Route::get('/edit/{id}', [TodoController::class, 'edit'])->name('list.edit');
-    Route::put('/update', [TodoController::class, 'update'])->name('list.update');
-    Route::delete('/delete', [TodoController::class, 'delete'])->name('list.delete');
+    Route::get('create', [TodoController::class, 'create'])->name('list.create');
+    Route::post('store', [TodoController::class, 'store'])->name('list.store');
+    Route::get('edit/{id}', [TodoController::class, 'edit'])->name('list.edit');
+    Route::put('update', [TodoController::class, 'update'])->name('list.update');
+    Route::delete('delete', [TodoController::class, 'delete'])->name('list.delete');
 
-    Route::post('/search', [TodoController::class, 'search'])->name('list.search');
+    Route::post('search', [TodoController::class, 'search'])->name('list.search');
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();
 

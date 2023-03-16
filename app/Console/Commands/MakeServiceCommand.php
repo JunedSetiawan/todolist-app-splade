@@ -29,6 +29,7 @@ class MakeServiceCommand extends Command
         $servicePath = app_path('Services/' . $serviceName . '.php');
         if (file_exists($servicePath)) {
             $this->error('Service already exists!');
+
             return;
         }
         $template = str_replace(
@@ -36,7 +37,7 @@ class MakeServiceCommand extends Command
             [$serviceName, $this->laravel->getNamespace() . 'Services'],
             file_get_contents(__DIR__ . '/stubs/service.stub')
         );
-        if (!file_exists(dirname($servicePath))) {
+        if (! file_exists(dirname($servicePath))) {
             mkdir(dirname($servicePath), 0755, true);
         }
         file_put_contents($servicePath, $template);
