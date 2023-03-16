@@ -7,7 +7,7 @@
     <div class="flex flex-row">
       <h1 class="text-2xl font-bold m-2">Daftar List</h1>
       <x-splade-form action="{{ route('list.search') }}" class="flex flex-row ml-2">
-        <x-splade-input name="cari" placeholder="Pencarian..." autofocus="true" />
+        <x-splade-input name="search" placeholder="Pencarian..." autofocus="true" />
         <x-splade-submit label="Cari" class="ml-2" />
       </x-splade-form>
       @unless (request()->routeIs('home'))

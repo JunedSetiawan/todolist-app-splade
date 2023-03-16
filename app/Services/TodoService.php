@@ -8,16 +8,16 @@ class TodoService
 {
     public function index()
     {
-        $lists = DB::table('lists')->latest()->paginate(10);
+        $lists = DB::table('lists')->orderBy('created_at', 'desc')->paginate(10);
 
         return $lists;
     }
 
     public function search($data)
     {
-        $lists = DB::table('lists')->where('name', 'like', '%' . $data['cari'] . '%')->paginate(10);
+        $list = DB::table('lists')->where('name', 'like', '%' . $data['search'] . '%')->paginate(10);
 
-        return $lists;
+        return $list;
     }
 
     public function store($data): bool
@@ -49,5 +49,7 @@ class TodoService
     public function delete($data)
     {
         $data = DB::table('lists')->where('id', $data['id'])->delete();
+
+        return $data;
     }
 }
