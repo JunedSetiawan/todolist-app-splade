@@ -21,15 +21,14 @@ class TodoController extends Controller
     public function index(): View
     {
         return view('list.index', [
-            'lists' => $this->service->index(),
+            'lists' => $this->service->index()
         ]);
     }
 
     public function store(CreateOrUpdateRequest $request): RedirectResponse
     {
         $this->service->store($request->all());
-
-        Toast::title('List berhasil Ditambahkan')->autoDismiss(5);
+        Toast::title('data berhasil ditambah')->autoDismiss(5);
 
         return redirect()->route('home');
     }
@@ -37,29 +36,30 @@ class TodoController extends Controller
     public function edit($id): View
     {
         return view('list.edit', [
-            'data' => $this->service->edit($id),
+            'data' => $this->service->edit($id)
         ]);
     }
 
     public function update(CreateOrUpdateRequest $request): RedirectResponse
     {
         $this->service->update($request->all());
-
-        Toast::title('List berhasil Diubah')->autoDismiss(5);
+        Toast::title('data berhasil diubah')->autoDismiss(5);
 
         return redirect()->route('home');
     }
 
     public function search(Request $request): View
     {
-        return view('list.index', ['lists' => $this->service->search($request->all())]);
+        return view('list.index', [
+            'lists' => $this->service->search($request->all()),
+        ]);
     }
 
-    public function delete(Request $request): RedirectResponse
+    public function delete(Request $request)
     {
         $this->service->delete($request->all());
 
-        Toast::title('List berhasil Dihapus')->autoDismiss(5);
+        Toast::title('data berhasil dihapus')->autoDismiss(5);
 
         return redirect()->route('home');
     }
