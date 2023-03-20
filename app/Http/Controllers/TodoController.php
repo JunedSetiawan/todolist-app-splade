@@ -55,7 +55,7 @@ class TodoController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): RedirectResponse
     {
         $this->service->delete($request->all());
 
